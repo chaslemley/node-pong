@@ -34,6 +34,11 @@ $(function() {
 			whichPlayer = response.player;
 		}
 		
+		if(response.message.match(/^volley$/)) {
+			var volley_length = 'Volley : ' + response.volley_length;
+			$('#volley').html(volley_length);
+		}
+		
 		if(response.message.match(/^player_one_move$/)) {
 			var player = $('#left');
 			player.animate({
@@ -51,6 +56,7 @@ $(function() {
 		if(response.message.match(/^score_update$/)) {
 			var score = response.player_one_score + " : " + response.player_two_score;
 			$('#message').html(score);
+			$('#volley').html("Volley : 0");
 		}
   };
 

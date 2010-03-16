@@ -11,6 +11,7 @@ player_one_top = 0;
 player_two_top = 0;
 player_one_score = 0;
 player_two_score = 0;
+volley_length = 0;
 
 var Module = this.Module = function(){
 	this.server = null;
@@ -30,16 +31,29 @@ var Module = this.Module = function(){
 			
 		if(ball_x == 12 && player_one_top <= ball_y && player_one_top + 60 >= ball_y) {
 			sys.puts("boing!!!");
+			volley_length++;
 			ball_dx = ball_dx * -1;
+			if(game_ready)
+			{
+				player_one.send(JSON.stringify({message: 'volley', volley_length: volley_length}));
+				player_two.send(JSON.stringify({message: 'volley', volley_length: volley_length}));
+			}
 		}
 		
 		if(ball_x == 778 && player_two_top <= ball_y && player_two_top + 60 >= ball_y) {
 			sys.puts("boing!!!");
+			volley_length++;
 			ball_dx = ball_dx * -1;
+			if(game_ready)
+			{
+				player_one.send(JSON.stringify({message: 'volley', volley_length: volley_length}));
+				player_two.send(JSON.stringify({message: 'volley', volley_length: volley_length}));
+			}
 		}
 		
 		if(ball_x == 0) {
 			player_two_score++;
+			volley_length = 0;
 			var msg = JSON.stringify({ message: 'score_update', player_one_score: player_one_score, player_two_score: player_two_score });		
 
 			if(game_ready)
@@ -52,6 +66,7 @@ var Module = this.Module = function(){
 		}
 		else if(ball_x == 790) {
 			player_one_score++;
+			volley_length = 0;
 			var msg = JSON.stringify({ message: 'score_update', player_one_score: player_one_score, player_two_score: player_two_score });		
 
 			if(game_ready)

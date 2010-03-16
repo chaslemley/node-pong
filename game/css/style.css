@@ -52,3 +52,11 @@ p#message{
 	text-align:center;
 	top:90px;
 }
+
+p#volley{
+	color:#F00;
+	position:absolute;
+	width:800px;
+	text-align:center;
+	top:120px;
+}
